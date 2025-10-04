@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs "NodeJS"   
+        nodejs "NodeJS"
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Bhautik2902/portfolio-json.git'
+                git branch: 'main', url: 'https://github.com/Bhautik2902/portfolio-json.git'
             }
         }
         stage('Install') {
