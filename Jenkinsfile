@@ -9,6 +9,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Bhautik2902/portfolio-json.git'
             }
         }
+	stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t portfolio-json .'
