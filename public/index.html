@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <link rel="icon" type="image/png" href="portfolio_favicon2.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d3748 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 20px 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .json-container {
+            padding: 30px;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .json-object {
+            margin-left: 20px;
+        }
+
+        .json-key {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .json-string {
+            color: #34d399;
+        }
+
+        .json-number {
+            color: #fbbf24;
+        }
+
+        .json-boolean {
+            color: #f87171;
+        }
+
+        .json-null {
+            color: #9ca3af;
+        }
+
+        .json-punctuation {
+            color: #e5e7eb;
+        }
+
+        .expandable {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .expandable:hover {
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 4px;
+        }
+
+        .toggle-icon {
+            display: inline-block;
+            width: 12px;
+            transition: transform 0.2s ease;
+            margin-right: 8px;
+            color: #94a3b8;
+        }
+
+        .collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .json-content {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .collapsed .json-content {
+            display: none;
+        }
+
+        .json-line {
+            padding: 2px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .json-line:hover {
+            background: rgba(71, 85, 105, 0.3);
+        }
+
+        .indent-1 { margin-left: 20px; }
+        .indent-2 { margin-left: 40px; }
+        .indent-3 { margin-left: 60px; }
+        .indent-4 { margin-left: 80px; }
+
+        .array-item {
+            margin: 4px 0;
+        }
+
+        .link {
+            color: #60a5fa;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .link:hover {
+            color: #93c5fd;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 80px;
+            right: 30px;
+            background: rgba(79, 70, 229, 0.8);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(79, 70, 229, 1);
+            transform: translateY(-1px);
+        }
+
+        .section-header {
+            font-weight: 700;
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+            color: #a78bfa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Professional Portfolio</h1>
+            <p>Bhautik Savaliya</p>
+        </div>
+        
+        <!-- <button class="copy-btn" onclick="copyToClipboard()">📋 Copy JSON</button> -->
+        
+        <div class="json-container" id="jsonContainer">
+            <div class="json-line">
+                <span class="json-punctuation">{</span>
+            </div>
+            
+            <!-- Personal Information -->
+            <div class="json-line indent-1">
+                <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"Bhautik Savaliya"</span><span class="json-punctuation">,</span>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-key">"email"</span><span class="json-punctuation">:</span> <span class="json-string">"bhautiksavaliya2000@gmail.com"</span><span class="json-punctuation">,</span>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-key">"github"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902')">"https://github.com/Bhautik2902"</span><span class="json-punctuation">,</span>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-key">"linkedin"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://www.linkedin.com/in/bhautik-savaliya-147872190/')">"https://www.linkedin.com/in/bhautik-savaliya-147872190/"</span><span class="json-punctuation">,</span>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-key">"website"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://portfolio.bhautiksavaliya.com')">"https://portfolio.bhautiksavaliya.com"</span><span class="json-punctuation">,</span>
+            </div>
+            
+            <div class="json-line indent-1 expandable" onclick="toggleSection('blogs')">
+                <span class="toggle-icon">▼</span><span class="json-key">"blogs"</span><span class="json-punctuation">: [</span>
+            </div>
+            <div class="json-content" id="blogs-content">
+                <div class="json-line indent-3"><span class="json-string link" onclick="openLink('https://medium.com/@bhautik2902/how-i-self-hosted-the-actual-budget-web-app-on-gcp-with-docker-and-nginx-b4135723bbe2')">"Self-hosting Actual Budget on GCP"</span><span class="json-punctuation">,</span></div>
+                <div class="json-line indent-3"><span class="json-string link" onclick="openLink('https://medium.com/@bhautik2902/effortless-ssh-access-from-anywhere-with-cloudflare-tunnel-b3fba88b107f')">"Effortless SSH Access from Anywhere with Cloudflare Tunnel"</span><span class="json-punctuation">,</span></div>
+                <div class="json-line indent-3"><span class="json-string link" onclick="openLink('https://medium.com/@bhautik2902/how-to-secure-a-self-hosted-web-app-with-https-using-nginx-and-lets-encrypt-6722c9f4e9de')">"How to Secure a Self-Hosted Web App with HTTPS Using Nginx and Let’s Encrypt"</span></div>
+            </div>
+            <div class="json-line indent-1"><span class="json-punctuation">],</span></div>
+
+            <!-- Experience Section -->
+            <div class="json-line indent-1 expandable" onclick="toggleSection('experience')">
+                <span class="toggle-icon">▼</span><span class="json-key">"experience"</span><span class="json-punctuation">: [</span>
+            </div>
+            <div class="json-content" id="experience-content">
+                <div class="json-object indent-2">
+                    <div class="json-line indent-2">
+                        <span class="json-punctuation">{</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"company"</span><span class="json-punctuation">:</span> <span class="json-string">"Maven Infosoft Pvt. Ltd."</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"role"</span><span class="json-punctuation">:</span> <span class="json-string">"Full Stack Developer"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"location"</span><span class="json-punctuation">:</span> <span class="json-string">"Ahmedabad, India"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"startDate"</span><span class="json-punctuation">:</span> <span class="json-string">"September 2023"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"endDate"</span><span class="json-punctuation">:</span> <span class="json-string">"August 2024"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3 expandable" onclick="toggleSection('jobDesc1')">
+                        <span class="toggle-icon">▼</span><span class="json-key">"jobDescription"</span><span class="json-punctuation">: [</span>
+                    </div>
+                    <div class="json-content" id="jobDesc1-content">
+                        <div class="json-line indent-4"><span class="json-string">"Delivered high-performance microservices for real-time data processing using C# and .NET Core, reducing latency by 35% to achieve market demands for speed."</span><span class="json-punctuation">,</span></div>
+                        <div class="json-line indent-4"><span class="json-string">"Implemented advanced Entity Framework strategies on PostgreSQL, including Compiled Queries, minimizing overhead for frequently run queries which boosted performance by 30%."</span><span class="json-punctuation">,</span></div>
+                        <div class="json-line indent-4"><span class="json-string">"Developed a custom C# API integration module that automated data exchange between systems, reducing manual input efforts by 25% and enhancing workflow efficiency."</span><span class="json-punctuation">,</span></div>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-punctuation">]</span>
+                    </div>
+                    <div class="json-line indent-2">
+                        <span class="json-punctuation">},</span>
+                    </div>
+                    <div class="json-line indent-2">
+                        <span class="json-punctuation">{</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"company"</span><span class="json-punctuation">:</span> <span class="json-string">"BrainyBeam Technologies Pvt. Ltd."</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"role"</span><span class="json-punctuation">:</span> <span class="json-string">"Application Development Intern"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"location"</span><span class="json-punctuation">:</span> <span class="json-string">"Ahmedabad, India"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"startDate"</span><span class="json-punctuation">:</span> <span class="json-string">"April 2021"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-key">"endDate"</span><span class="json-punctuation">:</span> <span class="json-string">"June 2021"</span><span class="json-punctuation">,</span>
+                    </div>
+                    <div class="json-line indent-3 expandable" onclick="toggleSection('jobDesc2')">
+                        <span class="toggle-icon">▼</span><span class="json-key">"jobDescription"</span><span class="json-punctuation">: [</span>
+                    </div>
+                    <div class="json-content" id="jobDesc2-content">
+                        <div class="json-line indent-4"><span class="json-string">"Developed a native Android feature for an e-commerce app enabling real-time product recommendations, increasing user engagement by 28%."</span><span class="json-punctuation">,</span></div>
+                        <div class="json-line indent-4"><span class="json-string">" Engineered an intelligent caching mechanism in a native Android e-commerce app, reducing API call latency by 40%."</span><span class="json-punctuation">,</span></div>
+                        <div class="json-line indent-4"><span class="json-string">"Partnered with cross-functional teams to define project requirements and optimize workflows, ensuring alignment with overall business objectives."</span><span class="json-punctuation">,</span></div>
+                    </div>
+                    <div class="json-line indent-3">
+                        <span class="json-punctuation">]</span>
+                    </div>
+                    <div class="json-line indent-2">
+                        <span class="json-punctuation">}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-punctuation">],</span>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="json-line indent-1 expandable" onclick="toggleSection('skills')">
+                <span class="toggle-icon">▼</span><span class="json-key">"skills"</span><span class="json-punctuation">: {</span>
+            </div>
+            <div class="json-content" id="skills-content">
+                <div class="json-line indent-2 expandable" onclick="toggleSection('technology')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"technology"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="technology-content">
+                    <div class="json-line indent-3"><span class="json-string">"Java"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"C#"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Python"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"JavaScript"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"TypeScript"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"SQL"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('webDevelopment')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"webDevelopment"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="webDevelopment-content">
+                    <div class="json-line indent-3"><span class="json-string">"ASP.NET MVC and Core"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"React.js"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Node.js"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Django"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"HTML/HTML5"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"CSS/TailwindCSS"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Bootstrap"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Figma"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('cloudPlatforms')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"cloudPlatforms"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="cloudPlatforms-content">
+                    <div class="json-line indent-3"><span class="json-string">"GCP"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Azure"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('devOpsAndContainerization')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"devOpsAndContainerization"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="devOpsAndContainerization-content">
+                    <div class="json-line indent-3"><span class="json-string">"Docker"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Git/GitHub"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Github Action"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Linux"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Jenkins"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('softwareDevelopment')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"softwareDevelopment"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="softwareDevelopment-content">
+                    <div class="json-line indent-3"><span class="json-string">"Agile/Scrum"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"JIRA"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Software testing"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"DevOps"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"RESTful API"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('tools')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"tools"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="tools-content">
+                    <div class="json-line indent-3"><span class="json-string">"Visual Studio"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"JetBrains PyCharm"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Visual Studio Code"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Android Studio"</span></div>
+                    
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">],</span></div>
+
+                <div class="json-line indent-2 expandable" onclick="toggleSection('misc')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"misc"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="misc-content">
+                    <div class="json-line indent-3"><span class="json-string">"Object-oriented Programming (OOP)"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"SOLID principles & Design Patterns"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Version Control Systems"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"System Administration"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Microservices"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Unix-Linux Systems"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-3"><span class="json-string">"Web Development"</span></div>
+                </div>
+                <div class="json-line indent-2"><span class="json-punctuation">]</span></div>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-punctuation">},</span>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="json-line indent-1 expandable" onclick="toggleSection('projects')">
+                <span class="toggle-icon">▼</span><span class="json-key">"projects"</span><span class="json-punctuation">: [</span>
+            </div>
+            <div class="json-content" id="projects-content">
+
+                <!-- project 1 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"BankSense"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"technologyUsed"</span><span class="json-punctuation">:</span> <span class="json-string">"Python, Selenium, Pandas, Machine Learning, Sentiment Analysis, Django"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3 expandable" onclick="toggleSection('BankSense_description')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"description"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="BankSense_description-content">
+                    <div class="json-line indent-4"><span class="json-string">"Developed a full-stack NLP platform to analyze customer reviews for banks supported by fine-tuned BERT models for sentiment classification. Enabled users to search banks or services and explore sentiment trends through interactive visualizations. Built with Django, Python, and ChartJS."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Developed an end-to-end NLP platform to analyze and visualize customer sentiments across multiple banks and financial services."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Built search functionality to allow users to query banks or specific services and view sentiment-based summaries."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Implemented dynamic data visualization using Matplotlib and ChartJS to display sentiment distributions and customer feedback trends."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Fine-tuned and integrated a pre-trained machine learning model for real-time sentiment classification (positive, negative, neutral) of user-generated text."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Designed full-stack application using Django (Python) for backend logic and user management."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Crafted responsive UI with HTML, CSS, Bootstrap, and JavaScript for an intuitive user experience."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Created a bank and service directory enabling users to search and filter services by sentiment and user feedback."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Applied text mining and NLP techniques (tokenization, cleaning, vectorization) to preprocess and analyze review data. Managed data pipelines to ingest, clean, and process large volumes of review data for real-time display."</span></div>
+                    
+                </div>
+                <div class="json-line indent-3"><span class="json-punctuation">]</span></div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"link"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902/BankReviewSentimentAnalysis')">"BankSense Github Repository"</span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- project 2 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"BargainBites"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"technologyUsed"</span><span class="json-punctuation">:</span> <span class="json-string">"Dart, Flutter, Firebase, Android Studio"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3 expandable" onclick="toggleSection('BargainBites_description')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"description"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="BargainBites_description-content">
+                    <div class="json-line indent-4"><span class="json-string">"Developed a Flutter-based Android and iOS application aimed at tackling food waste in Canada by promoting near-expired products at discounted rates. The app provides real-time listings from local retailers, enabling users to reserve and pick up items quickly. Integrated with Firebase for seamless authentication, database management, and real-time notifications. The project supports sustainability goals while offering cost-saving benefits to both consumers and small businesses."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Implemented real-time data integration and notifications to provide users with up-to-date grocery deals, supporting sustainability and smaller retailers."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Enhanced user experience while addressing environmental impact and increasing consumer affordability."</span></div>
+                </div>
+                <div class="json-line indent-3"><span class="json-punctuation">]</span></div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"link"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902/BargainBites')">"BargainBites Github Repository"</span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"ServerSync"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"technologyUsed"</span><span class="json-punctuation">:</span> <span class="json-string">"C, Linux, Shell Scripting, Bash"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3 expandable" onclick="toggleSection('ServerSync_description')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"description"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="ServerSync_description-content">
+                    <div class="json-line indent-4"><span class="json-string">"Built a multi-client file transfer application in C using TCP/IP sockets. The server handles parallel requests via process forking and allows clients to search, sort, and request files or directories. Files are compressed into .tar.gz before transfer to optimize performance."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Established multiple mirror servers to distribute client requests, enhancing load balancing and ensuring efficient resource utilization and improved performance."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Supports multiple clients using process forking"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Clients can filter files by name, size, type, or date"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Browse directories sorted alphabetically or by timestamp."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Files are sent in .tar.gz format to reduce bandwidth."</span></div>
+                    
+                </div>
+                <div class="json-line indent-3"><span class="json-punctuation">]</span></div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"link"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902/ServerSync')">"ServerSync Github Repository"</span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div> 
+
+                <!-- Project 4 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"Private Cloud (HomeLab)"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"technologyUsed"</span><span class="json-punctuation">:</span> <span class="json-string">"Docker, Kubernetes, Nginx, Cloudflare, Linux, Shell Scripting, Bash"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3 expandable" onclick="toggleSection('PrivateCloud_description')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"description"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="PrivateCloud_description-content">
+                    
+                    <div class="json-line indent-4"><span class="json-string">"Created a secure, self-hosted Linux (Ubuntu) server using Cloudflare Tunnels for external access, avoiding port forwarding and dynamic DNS"</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"The system hosts a suite of personal and utility services, including a finance management platform, private mail server, SSH service, and internal dashboards. Services are containerized using Docker and exposed through a secure CloudFlare tunnel."</span></div>
+                </div>
+                <div class="json-line indent-3"><span class="json-punctuation">]</span></div>
+                <!-- <div class="json-line indent-3">
+                    <span class="json-key">"link"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902/ServerSync')">"ServerSync Github Repository"</span>
+                </div> -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div> 
+
+                <!-- Project 5 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"name"</span><span class="json-punctuation">:</span> <span class="json-string">"EcoTourGuide"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"technologyUsed"</span><span class="json-punctuation">:</span> <span class="json-string">"Django, HTML/CSS, TailwindCSS, JavaScript, PostgreSQL"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3 expandable" onclick="toggleSection('EcoTourGuide_description')">
+                    <span class="toggle-icon">▼</span><span class="json-key">"description"</span><span class="json-punctuation">: [</span>
+                </div>
+                <div class="json-content" id="EcoTourGuide_description-content">
+                    <div class="json-line indent-4"><span class="json-string">"EcoTourGuide is an eco-conscious travel platform designed to help users discover and share sustainable travel experiences. Built using Django, the platform integrates robust user management, search and content-sharing features focused on environmentally responsible tourism."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Offers a comprehensive list of sustainable accommodations, eco-tours, and activities. Each listing includes detailed descriptions, pricing, location, and eco-friendly practices."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Dynamically generated pages for each travel listing, displaying rich content including descriptions, images, user reviews, and average ratings."</span><span class="json-punctuation">,</span></div>
+                    <div class="json-line indent-4"><span class="json-string">"Users can contribute feedback and rate their experiences, helping build a community-driven reputation system. Reviews appear on corresponding destination pages."</span></div>          
+                </div>
+                <div class="json-line indent-3"><span class="json-punctuation">]</span></div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"link"</span><span class="json-punctuation">:</span> <span class="json-string link" onclick="openLink('https://github.com/Bhautik2902/EcoTourGuide')">"EcoTourGuide Github Repository"</span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div> 
+
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-punctuation">],</span>
+            </div>
+
+            <!-- Education Section -->
+            <div class="json-line indent-1 expandable" onclick="toggleSection('education')">
+                <span class="toggle-icon">▼</span><span class="json-key">"education"</span><span class="json-punctuation">: [</span>
+            </div>
+            <div class="json-content" id="education-content">
+
+                <!-- Education 1 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"college"</span><span class="json-punctuation">:</span> <span class="json-string">"University of Windsor"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Master's of Applied Computing"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"courseStartDate"</span><span class="json-punctuation">:</span>"September 2023"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"courseEndDate"</span><span class="json-punctuation">:</span>"December 2024"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Education 2 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"college"</span><span class="json-punctuation">:</span> <span class="json-string">"Sardar Vallabhbhai Patel Institute of Technology"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Bachelor of Engineering in Computer Engineering"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"courseStartDate"</span><span class="json-punctuation">:</span>"July 2018"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"courseEndDate"</span><span class="json-punctuation">:</span>"May 2022"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">}</span>
+                </div>
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-punctuation">],</span>
+            </div>
+
+            <!-- Certification section -->
+            <div class="json-line indent-1 expandable" onclick="toggleSection('certification')">
+                <span class="toggle-icon">▼</span><span class="json-key">"certifications"</span><span class="json-punctuation">: [</span>
+            </div>
+            <div class="json-content" id="certifications-content">
+
+                <!-- Certification 1 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"LinkedIn Learning"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Continuous Integration/Continuous Delivery (CI/CD) with Jenkins"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"April 2024"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Certification 2 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"LinkedIn Learning"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Microsoft Azure DevOps Engineer Expert (AZ-400) Cert Prep: 1 & 2"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"November 2024"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Certification 3 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"LinkedIn Learning"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Advance Your Skills in Natural Language Processing"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"September 2024"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+
+                <!-- Certification 4 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"Microsoft & LinkedIn Learning"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Career Essentials in Software Development"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"November 2023"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Certification 5 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"Udemy & GenMan Solutions"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Scrum Fundamentals for Scrum Masters and Agile Projects"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"September 2021"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                <!-- Certification 6 -->
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">{</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issuedBy"</span><span class="json-punctuation">:</span> <span class="json-string">"Google Digital Garage"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"studyType"</span><span class="json-punctuation">:</span> <span class="json-string">"Fundamentals of Digital Marketing"</span><span class="json-punctuation">,</span>
+                </div>
+                <div class="json-line indent-3">
+                    <span class="json-key">"issueDate"</span><span class="json-punctuation">:</span>"August 2020"<span class="json-number"></span>
+                </div>
+                <div class="json-line indent-2">
+                    <span class="json-punctuation">},</span>
+                </div>
+
+                
+            </div>
+            <div class="json-line indent-1">
+                <span class="json-punctuation">]</span>
+            </div>
+
+            <div class="json-line">
+                <span class="json-punctuation">}</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const toggleIcon = event.currentTarget.querySelector('.toggle-icon');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                toggleIcon.style.transform = 'rotate(0deg)';
+                event.currentTarget.classList.remove('collapsed');
+            } else {
+                content.style.display = 'none';
+                toggleIcon.style.transform = 'rotate(-90deg)';
+                event.currentTarget.classList.add('collapsed');
+            }
+        }
+
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+    </script>
+</body>
+</html>
